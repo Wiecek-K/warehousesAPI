@@ -1,0 +1,46 @@
+{
+  "name": "warehousesapi",
+  "version": "1.0.0",
+  "description": "Express.js TypeScript API",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "lint": "eslint . --ext .ts",
+    "fetch:molos": "ts-node src/scripts/fetchMolosStock.ts",
+    "fetch:action": "ts-node src/scripts/fetchActionStock.ts",
+    "fetch:apilo": "ts-node src/scripts/fetchApiloStock.ts",
+    "parse:molos": "ts-node src/scripts/parseMolosStock.ts",
+    "parse:action": "ts-node src/scripts/parseActionStock.ts",
+    "parse:apilo": "ts-node src/scripts/parseApiloStock.ts",
+    "parse:all": "ts-node src/scripts/parseAllStocks.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wiecek-K/warehousesAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wiecek-K/warehousesAPI/issues"
+  },
+  "homepage": "https://github.com/Wiecek-K/warehousesAPI#readme",
+  "dependencies": {
+    "@types/xml2js": "^0.4.14",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "fast-xml-parser": "^5.0.8",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.10",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
+    "@typescript-eslint/parser": "^8.26.1",
+    "eslint": "^9.22.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.2"
+  }
+}
