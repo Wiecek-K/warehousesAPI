@@ -98,7 +98,7 @@ async function parseMolosXmlToJson(
 
       item.priceGross =
         item.vat && item.priceNet
-          ? (item.priceGross = item.priceNet * (1 + item.vat))
+          ? Number((item.priceNet * (1 + item.vat)).toFixed(2))
           : 0;
 
       if (item.ean) {

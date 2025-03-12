@@ -1,0 +1,38 @@
+[
+  {
+    "ean": "8584163053902",
+    "name": "Strend Pro BHS44, 76 mm, M3 Bi-metal, kovová korunka, pila",
+    "quantity": -3,
+    "priceNet": "16.50",
+    "priceGross": "20.29",
+    "vat": 0.23,
+    "source": "sandbox"
+  },
+  {
+    "ean": "8710103836049",
+    "name": "ANIMONDA VOM FEINSTEN ADULT 32 x 150g MIX SMAKÓW",
+    "quantity": -536,
+    "priceNet": "10",
+    "priceGross": "10.8",
+    "vat": 0.08,
+    "source": "sandbox"
+  },
+  {
+    "ean": "5906744516379",
+    "name": "Taste of the Wild High Prairie Puppy 2kg",
+    "quantity": 19,
+    "priceNet": "126.39",
+    "priceGross": "136.50",
+    "vat": 0.08,
+    "source": "sandbox"
+  },
+  {
+    "ean": "8711231175833",
+    "name": "Brit Care Dog Mini Rabbit & Salmon saszetka 85g",
+    "quantity": 2,
+    "priceNet": "10.19",
+    "priceGross": "11.00",
+    "vat": 0.08,
+    "source": "sandbox"
+  }
+]
