@@ -62,13 +62,17 @@ app.get("/productByEan", (req: Request, res: Response) => {
       // Find product by EAN
       const product = allStocks.find((product) => product.ean === ean);
 
-      if (!product) {
-        return res.status(404).json({
-          error: `Product with EAN ${ean} not found.`,
-        });
-      }
+      // if (!product) {
+      //   return res.status(404).json({
+      //     error: `Product with EAN ${ean} not found.`,
+      //   });
+      // }
 
-      console.log(`Found product with EAN ${ean}: ${product.name}`);
+      console.log(
+        `Found product with EAN ${ean}: ${
+          product?.name ? product.name : "NOT FOUND"
+        }`
+      );
 
       res.json({
         product: product,
