@@ -36,8 +36,54 @@ async function loadAllStocksData(): Promise<WarehouseItem[]> {
   }
 }
 
+// GET endpoint for retrieving a product by EAN
+app.get("/productByEan", (req: Request, res: Response) => {
+  (async () => {
+    try {
+      const ean = req.query.ean as string;
+
+      // Validate input
+      if (!ean) {
+        return res.status(400).json({
+          error:
+            "Invalid request. Please provide an EAN number as a query parameter.",
+        });
+      }
+
+      // Load stock data
+      const allStocks = await loadAllStocksData();
+
+      if (allStocks.length === 0) {
+        return res.status(500).json({
+          error: "Failed to load stock data or no stock data available.",
+        });
+      }
+
+      // Find product by EAN
+      const product = allStocks.find((product) => product.ean === ean);
+
+      if (!product) {
+        return res.status(404).json({
+          error: `Product with EAN ${ean} not found.`,
+        });
+      }
+
+      console.log(`Found product with EAN ${ean}: ${product.name}`);
+
+      res.json({
+        product: product,
+      });
+    } catch (error: any) {
+      console.error("Error processing request:", error.message || error);
+      res.status(500).json({
+        error: "Internal server error.",
+      });
+    }
+  })();
+});
+
 // Define the routes
-app.get("/getProductsByEan", function (req, res) {
+app.post("/productsByEan", function (req, res) {
   (async () => {
     try {
       const eanArray = req.body.eans;

@@ -114,7 +114,50 @@ interface WarehouseItem {
 
 ## API Endpoints
 
-### `POST /getProductsByEan`
+### `GET /productByEan`
+
+Retrieves a single product matching the provided EAN code.
+
+**Request URL**:
+
+```
+GET /productByEan?ean=1234567890123
+```
+
+**Response**:
+
+```json
+{
+  "product": {
+    "ean": "1234567890123",
+    "name": "Product Name",
+    "quantity": 42,
+    "priceNet": 10.99,
+    "priceGross": 13.52,
+    "vat": 0.23,
+    "source": "Molos"
+  }
+}
+```
+
+**Error Responses**:
+
+- `400 Bad Request`: When no EAN parameter is provided
+
+  ```json
+  {
+    "error": "Invalid request. Please provide an EAN number as a query parameter."
+  }
+  ```
+
+- `404 Not Found`: When no product with the specified EAN exists
+  ```json
+  {
+    "error": "Product with EAN 1234567890123 not found."
+  }
+  ```
+
+### `POST /productsByEan`
 
 Retrieves products matching the provided EAN codes.
 
