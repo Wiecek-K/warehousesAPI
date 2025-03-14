@@ -91,7 +91,7 @@ async function fetchApiloStock() {
       "warehouses",
       "apilo"
     );
-    const jsonPath = path.join(dataDir, "apilo-stock.json");
+    const jsonPath = path.join(dataDir, "stock.json");
     const timestampPath = path.join(dataDir, "last-update.txt");
 
     // Save both data and timestamp files

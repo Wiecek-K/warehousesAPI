@@ -41,7 +41,7 @@ async function fetchActionStock() {
       "warehouses",
       "action"
     );
-    const csvPath = path.join(dataDir, "action-stock.csv");
+    const csvPath = path.join(dataDir, "stock.csv");
     const timestampPath = path.join(dataDir, "last-update.txt");
 
     // Save both data and timestamp files

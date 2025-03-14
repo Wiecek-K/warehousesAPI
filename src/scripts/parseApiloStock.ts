@@ -33,7 +33,7 @@ async function parseApiloStock(): Promise<WarehouseItem[]> {
       "warehouses",
       "apilo"
     );
-    const filePath = path.join(baseDir, "apilo-stock.json");
+    const filePath = path.join(baseDir, "stock.json");
 
     const rawData = await readFile(filePath, "utf-8");
     const apiloProducts: ApiloProduct[] = JSON.parse(rawData);

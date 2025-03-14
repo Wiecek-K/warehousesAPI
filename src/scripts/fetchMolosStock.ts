@@ -41,7 +41,7 @@ async function fetchMolosStock() {
       "warehouses",
       "molos"
     );
-    const xmlPath = path.join(dataDir, "molos-stock.xml");
+    const xmlPath = path.join(dataDir, "stock.xml");
     const timestampPath = path.join(dataDir, "last-update.txt");
 
     // Save both data and timestamp files

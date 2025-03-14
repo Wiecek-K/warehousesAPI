@@ -1,0 +1,11 @@
+Przy uruchamianiu wcześniej zbudowanej aplikacji wystarczy uruchomić w odpowiedniej kolejności pliki .bat:
+1. pliki Pobierz<Nazwa_Serwisu>.bat - pobierają one aktualne stany magazynowe
+2. plik SparsujDane.bat - konwertuje oraz łaczy on w całość wcześniej pobrane stany magazynowe
+3. plik StartServer.bat - uruchamia on naszą bazę stanów magazynowych z którą komunikuje się główna aplikacja. WAŻNE! Ten terminal musi być włączony podczas pracy z aplikacją
+
+PS. Istnieje również możliwość "ręcznego" wklejenia plików stanów magazynowych dla Molos/Action
+Aby to zrobić pobrany plik należy nazwać "stock" i umieścić w folderze odpowiednim dla danego magazynu, licząc od folderu głównego tej aplikacji foldery docelowe znajdują się ./src/data/warehouses/<nazwa_magazynu>
+Jednakże na chwilę obecną obsługuję jedynie
+- dla Molos plik .xml oznaczony jako products (końcówka linku "/products.xml")
+- dla Action plik .csv (początek linku "http://xml.action.pl/Export_CSV.")
+Użycie plików o innych rozszerzeniach spowoduje że dane nie pojawią się w naszej wspólnej bazie. Użycie plików o tym samym rozszerzeniu ale z innego linku (plik stanu pełny/ pozbawiony niektórych z właściwości produktów) najprawdopodobniej doprowadzi do nieoczekiwanych błędów

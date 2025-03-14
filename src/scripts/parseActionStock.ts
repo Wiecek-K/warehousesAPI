@@ -79,7 +79,7 @@ async function parseActionStock(): Promise<WarehouseItem[]> {
       "warehouses",
       "action"
     );
-    const filePath = path.join(baseDir, "action-stock.csv");
+    const filePath = path.join(baseDir, "stock.csv");
 
     const rawData = await readFile(filePath, "utf-8");
     const lines = rawData.split("\n");

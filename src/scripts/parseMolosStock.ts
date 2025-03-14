@@ -15,7 +15,7 @@ async function readMolosStockFile(): Promise<string> {
       "data",
       "warehouses",
       "molos",
-      "molos-stock.xml"
+      "stock.xml"
     );
     console.log("ℹ️ Reading Molos stock file from:", filePath);
     return await fs.readFile(filePath, "utf-8");
