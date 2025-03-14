@@ -66,12 +66,12 @@ async function parseMolosXmlToJson(
 
     for (const element of productElements) {
       const item: WarehouseItem = {
+        name: "",
         quantity: 0,
+        priceGross: 0,
         priceNet: 0,
         vat: 0,
         ean: "",
-        name: "",
-        priceGross: 0,
         source: "molos",
       };
 

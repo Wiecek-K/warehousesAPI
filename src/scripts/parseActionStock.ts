@@ -151,10 +151,10 @@ async function parseActionStock(): Promise<WarehouseItem[]> {
             ean: product.ean,
             name: product.nazwa_produktu,
             quantity: parseQuantity(product.stan_mag),
+            priceGross: parsePrice(product.cena_brutto_pln),
             priceNet: parsePrice(product.cena_netto_pln),
             vat: calculateVat(product.cena_netto_pln, product.cena_brutto_pln),
             source: "action",
-            priceGross: parsePrice(product.cena_brutto_pln),
           };
 
           return parsed;

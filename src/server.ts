@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import { WarehouseItem } from "./types/warehouse";
+import { AggregatedProduct } from "./types/warehouse";
 import path from "path";
 import fs from "fs/promises";
 dotenv.config();
@@ -18,7 +18,7 @@ app.get("/", (req: Request, res: Response) => {
  * Loads all warehouse stock data from JSON file
  * @returns Promise with array of warehouse items
  */
-async function loadAllStocksData(): Promise<WarehouseItem[]> {
+async function loadAllStocksData(): Promise<AggregatedProduct[]> {
   try {
     const filePath = path.join(
       process.cwd(),
@@ -27,9 +27,9 @@ async function loadAllStocksData(): Promise<WarehouseItem[]> {
       "processed",
       "all-stocks.json"
     );
-    console.log(`Loading stock data from ${filePath}`);
+
     const data = await fs.readFile(filePath, "utf-8");
-    return JSON.parse(data) as WarehouseItem[];
+    return JSON.parse(data) as AggregatedProduct[];
   } catch (error: any) {
     console.error("Error loading stocks data:", error.message || error);
     return [];
@@ -58,18 +58,12 @@ app.get("/productByEan", (req: Request, res: Response) => {
           error: "Failed to load stock data or no stock data available.",
         });
       }
-
       // Find product by EAN
       const product = allStocks.find((product) => product.ean === ean);
 
-      const notFoundProduct: WarehouseItem = {
+      const notFoundProduct: AggregatedProduct = {
         ean,
-        name: "NOT FOUND",
-        quantity: 0,
-        priceNet: 0,
-        priceGross: 0,
-        vat: 0,
-        source: "NOT FOUND",
+        availableOn: [],
       };
 
       if (!product) {
@@ -80,14 +74,12 @@ app.get("/productByEan", (req: Request, res: Response) => {
       }
 
       console.log(
-        `Found product with EAN ${ean}: ${
-          product?.name ? product.name : "NOT FOUND"
-        }`
+        `Found product with EAN ${ean} in: ${
+          product.availableOn?.length ? product.availableOn.length : 0
+        } warehouses`
       );
 
-      res.json({
-        product: product,
-      });
+      res.json(product);
     } catch (error: any) {
       console.error("Error processing request:", error.message || error);
       res.status(500).json({
