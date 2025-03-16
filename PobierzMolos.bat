@@ -1,4 +1,4 @@
 @echo off
 cd /d %~dp0
-npm run fetch:molos
+call npm run fetch:molos
 pause

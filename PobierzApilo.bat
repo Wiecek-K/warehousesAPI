@@ -1,4 +1,4 @@
 @echo off
 cd /d %~dp0
-npm run fetch:apilo
+call npm run fetch:apilo
 pause

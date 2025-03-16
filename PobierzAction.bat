@@ -1,4 +1,4 @@
 @echo off
 cd /d %~dp0
-npm run fetch:action
+call npm run fetch:action
 pause

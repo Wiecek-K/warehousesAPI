@@ -1,6 +1,9 @@
+Podczas pierwszego uruchomienia po pobraniu update (git pull), lub zmian w pliku .env. W celu wprowadzeniu zmian do aplikacji należy uruchomić plik:
+- InstallServer.bat
+
 Przy uruchamianiu wcześniej zbudowanej aplikacji wystarczy uruchomić w odpowiedniej kolejności pliki .bat:
 1. pliki Pobierz<Nazwa_Serwisu>.bat - pobierają one aktualne stany magazynowe
-2. plik SparsujDane.bat - konwertuje oraz łaczy on w całość wcześniej pobrane stany magazynowe
+2. plik SparsujDane.bat - konwertuje oraz łączy on w całość wcześniej pobrane stany magazynowe
 3. plik StartServer.bat - uruchamia on naszą bazę stanów magazynowych z którą komunikuje się główna aplikacja. WAŻNE! Ten terminal musi być włączony podczas pracy z aplikacją
 
 PS. Istnieje również możliwość "ręcznego" wklejenia plików stanów magazynowych dla Molos/Action
@@ -9,3 +12,40 @@ Jednakże na chwilę obecną obsługuję jedynie
 - dla Molos plik .xml oznaczony jako products (końcówka linku "/products.xml")
 - dla Action plik .csv (początek linku "http://xml.action.pl/Export_CSV.")
 Użycie plików o innych rozszerzeniach spowoduje że dane nie pojawią się w naszej wspólnej bazie. Użycie plików o tym samym rozszerzeniu ale z innego linku (plik stanu pełny/ pozbawiony niektórych z właściwości produktów) najprawdopodobniej doprowadzi do nieoczekiwanych błędów
+
+
+
+
+
+W przypadku błędu:
+
+node:events:496
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1937:16)
+    at listenInCluster (node:net:1994:12)
+    at Server.listen (node:net:2099:7)
+    at Function.listen (C:\Users\aimag\Documents\GitHub\warehousesAPI\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\aimag\Documents\GitHub\warehousesAPI\dist\server.js:108:5)
+    at Module._compile (node:internal/modules/cjs/loader:1554:14)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+    at Function._load (node:internal/modules/cjs/loader:1108:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1973:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+Zamiast wartości może się pojawić 3000 lub inna ustawiona w pliku .env
+Oznacza to że instancja serwera jest już uruchomiona na komputerze, jeśli jednak jesteśmy pewni że inny terminal z serwerem nie działa w tle należy:
+- otworzyć menadżer zadań
+- znaleźć proces opisany jako "node.js" lub "Node.js JavaScript Runtime"
+- zakończyć proces
+- ponownie uruchomić server
