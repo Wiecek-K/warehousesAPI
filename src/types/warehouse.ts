@@ -8,6 +8,11 @@ export type WarehouseItem = {
   priceGross: number;
 };
 
+export type AggregatedProduct = {
+  ean: string;
+  availableOn: WarehouseAvailability[];
+};
+
 export type WarehouseAvailability = {
   quantity: number;
   priceNet: number;
@@ -15,9 +20,4 @@ export type WarehouseAvailability = {
   name: string;
   priceGross: number;
   source: string;
-};
-
-export type AggregatedProduct = {
-  ean: string;
-  availableOn: WarehouseAvailability[];
 };

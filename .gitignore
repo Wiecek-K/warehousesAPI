@@ -1,8 +1,8 @@
 # Data files
 src/data/warehouses/molos/*
 !src/data/warehouses/molos/.gitkeep
-src/data/warehouses/action/*
-!src/data/warehouses/action/.gitkeep
+# src/data/warehouses/action/*
+# !src/data/warehouses/action/.gitkeep
 src/data/warehouses/apilo/*
 !src/data/warehouses/apilo/.gitkeep
 src/data/processed/*
