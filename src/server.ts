@@ -134,6 +134,29 @@ app.post("/productsByEan", function (req, res) {
   })();
 });
 
+app.get("/timestamps", (req: Request, res: Response) => {
+  (async () => {
+    try {
+      const filePath = path.join(
+        process.cwd(),
+        "src",
+        "data",
+        "processed",
+        "last-update.json"
+      );
+
+      const data = JSON.parse(await fs.readFile(filePath, "utf-8")) || [];
+      console.log(data);
+      res.json(data);
+    } catch (error: any) {
+      console.error("Error processing request:", error.message || error);
+      res.status(500).json({
+        error: "Internal server error.",
+      });
+    }
+  })();
+});
+
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });

@@ -1,6 +1,8 @@
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 import { WarehouseItem } from "../types/warehouse";
+import { copyLastUpdateDate } from "../utils/copyLastUpdateDate";
+import { saveParsedStockAsJson } from "../utils/saveParsedStockAsJson";
 
 type ApiloStatus = 0 | 1 | 8;
 
@@ -37,6 +39,7 @@ async function parseApiloStock(): Promise<WarehouseItem[]> {
 
     const rawData = await readFile(filePath, "utf-8");
     const apiloProducts: ApiloProduct[] = JSON.parse(rawData);
+
     console.log(`✓ Loaded ${apiloProducts.length} products from JSON file`);
 
     const parsedProducts: WarehouseItem[] = apiloProducts.map((product) => ({
@@ -53,12 +56,8 @@ async function parseApiloStock(): Promise<WarehouseItem[]> {
       `✓ Converted ${parsedProducts.length} products to common format`
     );
 
-    // Save processed data
-    const processedDir = path.join(process.cwd(), "src", "data", "processed");
-    const processedPath = path.join(processedDir, "apilo-processed.json");
-
-    await writeFile(processedPath, JSON.stringify(parsedProducts, null, 2));
-    console.log(`✓ Successfully saved data to: ${processedPath}\n`);
+    await saveParsedStockAsJson("apilo", parsedProducts);
+    await copyLastUpdateDate("apilo");
 
     return parsedProducts;
   } catch (error) {

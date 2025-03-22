@@ -1,6 +1,8 @@
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 import { WarehouseItem } from "../types/warehouse";
+import { saveParsedStockAsJson } from "../utils/saveParsedStockAsJson";
+import { copyLastUpdateDate } from "../utils/copyLastUpdateDate";
 
 interface ActionProduct {
   grupa_towarowa: string;
@@ -180,12 +182,8 @@ async function parseActionStock(): Promise<WarehouseItem[]> {
       );
     }
 
-    // Save processed data
-    const processedDir = path.join(process.cwd(), "src", "data", "processed");
-    const processedPath = path.join(processedDir, "action-processed.json");
-
-    await writeFile(processedPath, JSON.stringify(parsedProducts, null, 2));
-    console.log(`✓ Successfully saved data to: ${processedPath}\n`);
+    await saveParsedStockAsJson("action", parsedProducts);
+    await copyLastUpdateDate("action");
 
     return parsedProducts;
   } catch (error) {

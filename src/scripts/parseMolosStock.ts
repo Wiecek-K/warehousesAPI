@@ -2,6 +2,8 @@ import { parseString } from "xml2js";
 import { promises as fs } from "fs";
 import path from "path";
 import { WarehouseItem } from "../types/warehouse";
+import { saveParsedStockAsJson } from "../utils/saveParsedStockAsJson";
+import { copyLastUpdateDate } from "../utils/copyLastUpdateDate";
 
 /**
  * Reads Molos stock XML file and returns its contents
@@ -108,16 +110,8 @@ async function parseMolosXmlToJson(
 
     console.log(`✓ Parsed ${items.length} items from Molos XML`);
 
-    // Save processed data
-    const outputDir = path.join(process.cwd(), "src", "data", "processed");
-    await fs.mkdir(outputDir, { recursive: true });
-    await fs.writeFile(
-      path.join(outputDir, "molos-processed.json"),
-      JSON.stringify(items, null, 2)
-    );
-    console.log(
-      `✓ Successfully saved data to: src/data/processed/molos-processed.json`
-    );
+    await saveParsedStockAsJson("molos", items);
+    await copyLastUpdateDate("molos");
 
     return items;
   } catch (error: any) {
@@ -137,7 +131,6 @@ async function processMolosStock(): Promise<WarehouseItem[]> {
     console.log("\nℹ️ Started processing Molos stock:");
     const xmlContent = await readMolosStockFile();
     const data = await parseMolosXmlToJson(xmlContent);
-    console.log("✓ Molos stock processing completed successfully");
     return data;
   } catch (error: any) {
     console.error("❌ Failed to process Molos stock:", error.message || error);
