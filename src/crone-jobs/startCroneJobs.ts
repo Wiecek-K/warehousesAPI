@@ -5,7 +5,7 @@ import { fetchApiloStock } from "../scripts/fetchApiloStock";
 import { parseAllStocks } from "../scripts/parseAllStocks";
 
 export function startCronJobs() {
-  cron.schedule("* */4 * * *", async () => {
+  cron.schedule("0 */4 * * *", async () => {
     console.log("Running cron job...");
 
     await Promise.allSettled([
