@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { AggregatedProduct } from "./types/warehouse";
 import path from "path";
 import fs from "fs/promises";
+import { startCronJobs } from "./crone-jobs/startCroneJobs";
 dotenv.config();
 
 const app: Express = express();
@@ -146,7 +147,6 @@ app.get("/timestamps", (req: Request, res: Response) => {
       );
 
       const data = JSON.parse(await fs.readFile(filePath, "utf-8")) || [];
-      console.log(data);
       res.json(data);
     } catch (error: any) {
       console.error("Error processing request:", error.message || error);
@@ -156,6 +156,8 @@ app.get("/timestamps", (req: Request, res: Response) => {
     }
   })();
 });
+
+startCronJobs();
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
